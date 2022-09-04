@@ -1,0 +1,104 @@
+﻿<Page
+    x:Class="WinUIAccessibilitySamples.Samples.ElementNameSamples"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUIAccessibilitySamples.Samples"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WinUIAccessibilitySamples.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <TextBlock Text="Automation names" Style="{StaticResource HeaderTextBlockStyle}"/>
+        <RichTextBlock Style="{StaticResource DefaultDescriptionStyle}">
+            <Paragraph>
+                Screenreaders their users rely on descriptive UIA names for elements in an app.
+                    A lot of controls already have good fallback behavior by reading out the content if it's content is a string or can be converted to string.
+                    However not evrey fallback name is ideal and elements such as images or lists don't have a way to create a good name by default.
+                    In these cases, you need to provide a good UIA name for these controls (or remove them from the UIA tree).
+            </Paragraph>
+            <Paragraph>
+                In UWP you can add UIA names using the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.automationproperties.nameproperty">AutomationProperties.Name property</Hyperlink> .
+                    Below are a few examples of how to use the AutomationProperties.Name property.
+                    
+                    In addition to the AutomationProperties.Name property, controls can also be labeled by another control. To tell screen readers that a control is labeled by another control, you can use the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.automationproperties.labeledbyproperty">AutomationProperties.LabeledBy</Hyperlink> property.
+                    When using that property, a control labeled by another control will then be announced with the label of the labeling control.
+            </Paragraph>
+        </RichTextBlock>
+        <StackPanel HorizontalAlignment="Left">
+            <controls:CodeExample HeaderText="Button example">
+                <controls:CodeExample.Example>
+                    <StackPanel HorizontalAlignment="Left">
+                        <Button AutomationProperties.Name="Like" Content="👍"/>
+                        <TextBlock Text="This button will be announced as 'Like'" TextWrapping="WrapWholeWords" FontStyle="Italic"/>
+                    </StackPanel>
+                </controls:CodeExample.Example>
+                <controls:CodeExample.Xaml>
+                    <x:String>&lt;Button AutomationProperties.Name="Like" Content="👍"/&gt;</x:String>
+                </controls:CodeExample.Xaml>
+            </controls:CodeExample>
+
+            <controls:CodeExample HeaderText="Input using labeled by">
+                <controls:CodeExample.Example>
+                    <StackPanel>
+                        <TextBlock x:Name="SearchLabel" FontSize="16" Text="Search:"/>
+                        <TextBox AutomationProperties.LabeledBy="{x:Bind SearchLabel}"/>
+                        <TextBlock Text="The input above is labeled by the 'Search:' text using the LabeledBy attached property." 
+                                TextWrapping="WrapWholeWords" FontStyle="Italic" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </controls:CodeExample.Example>
+                <controls:CodeExample.Xaml>
+                    <x:String xml:space="preserve">
+&lt;TextBlock x:Name="InputLabel" FontSize="18" Text="Search:"/&gt;
+&lt;TextBox AutomationProperties.LabeledBy="{x:Bind InputLabel}"/&gt;
+                        </x:String>
+                </controls:CodeExample.Xaml>
+            </controls:CodeExample>
+
+            <controls:CodeExample HeaderText="Image example">
+                <controls:CodeExample.Example>
+                    <StackPanel>
+                        <Image Source="ms-appx:///Assets/Snowlandscape.jpg" AutomationProperties.Name="Image of snow landscape." 
+                                MaxWidth="500"/>
+                        <TextBlock Text="This image will be announced to users as 'Image of snow landscape.'"
+                                TextWrapping="WrapWholeWords" FontStyle="Italic"/>
+                    </StackPanel>
+                </controls:CodeExample.Example>
+                <controls:CodeExample.Xaml>
+                    <x:String xml:space="preserve">
+&lt;Image Source="msappx:///Assets/Snowlandscape.jpg"
+    AutomationProperties.Name="Image of snow landscape at sunset."/&gt;
+                        </x:String>
+                </controls:CodeExample.Xaml>
+            </controls:CodeExample>
+
+            <controls:CodeExample HeaderText="List example">
+                <controls:CodeExample.Example>
+                    <StackPanel>
+                        <ListView Width="300" AutomationProperties.Name="Contacts" HorizontalAlignment="Left">
+                            <ListViewItem>Nathan Quinn</ListViewItem>
+                            <ListViewItem>Jessica Lambert</ListViewItem>
+                            <ListViewItem>Carl Bond</ListViewItem>
+                            <ListViewItem>Jessica Russell</ListViewItem>
+                        </ListView>
+                        <TextBlock Margin="0,10,0,0" TextWrapping="WrapWholeWords" FontStyle="Italic"
+                                Text="The list will be announced as 'Contacts', the individual items will be announced using their content."/>
+                    </StackPanel>
+                </controls:CodeExample.Example>
+                <controls:CodeExample.Xaml>
+                    <x:String xml:space="preserve">
+&lt;ListView Width="300" AutomationProperties.Name="Contacts"&gt;
+    &lt;ListViewItem&gt;Nathan Quinn&lt;/ListViewItem&gt;
+    &lt;ListViewItem&gt;Jessica Lambert&lt;/ListViewItem&gt;
+    &lt;ListViewItem&gt;Carl Bond&lt;/ListViewItem&gt;
+    &lt;ListViewItem&gt;Jessica Russell&lt;/ListViewItem&gt;
+&lt;/ListView>
+                        </x:String>
+                </controls:CodeExample.Xaml>
+            </controls:CodeExample>
+        </StackPanel>
+    </StackPanel>
+</Page>

@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="WinUIAccessibilitySamples.Samples.AutomationPeerReadme"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUIAccessibilitySamples.Samples"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <TextBlock Text="Authoring AutomationPeers" Style="{StaticResource HeaderTextBlockStyle}"/>
+        <RichTextBlock Style="{StaticResource DefaultDescriptionStyle}">
+            <Paragraph>
+                One of the main ways assistive technology interacts with controls are AutomationPeers.
+                    An AutomationPeer is the UIA view of a control, interactions made through assistive technology are received by your controls AutomationPeer.
+            </Paragraph>
+            <Paragraph>
+                There are multiple different properties and methods an AutomationPeer needs to implement to help assistive technologies with your control.
+                    Through the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.automationpeer.getpatterncore">GetPatternCore</Hyperlink> , 
+                    your control can let assistive technologies know what roles and patterns your control supports.
+                    A list of patterns assistive technologies can interact with your control through can be found
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.patterninterface">here</Hyperlink> .
+                <LineBreak/>
+                For example, when implementing an expander control, your AutomationPeer need to let assistive technology know that it supports the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/windows/win32/winauto/uiauto-implementingexpandcollapse">ExpandCollapse pattern</Hyperlink> .
+                    When
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.automationpeer.getpatterncore">GetPatternCore</Hyperlink> ,
+                    gets called with the PatternInterface.ExpandCollapsePattern value as parameter, the AutomationPeer then should return itsself as an expander control supports that pattern.
+                <LineBreak/>
+                If an AutomationPeer/control supports a specific pattern, the AutomationPeer should also implement the specific interface. In the case of the ExpandCollapse pattern, the AutomationPeer should implement the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.automation.provider.iexpandcollapseprovider?view=winrt-19041">IExpandCollapseProvider interface</Hyperlink> .
+                <LineBreak/>
+                Every pattern has an accompanying interface that the AutomationPeer should implement if the peer supports that patterns.
+                    The interfaces for the patterns can be looked up
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.patterninterface">here</Hyperlink> .
+                <LineBreak/>
+                <LineBreak/>
+                When authoring your own control, another important aspect of UI automation is the control type of controls.
+                    Control types let users of assistive technologies know what type of control they are interacting with and what options are available.
+                    To let assistive technology know the control type, you can override the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.automationpeer.getautomationcontroltypecore">GetAutomationControlTypeCore</Hyperlink>
+                method and return the appropriate value.
+                    You can find the list of available control types
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.automationcontroltype">here</Hyperlink> .
+                    If none of the control types describe your control well enough, you can return AutomationControlType.Custom. Note though, that you should return the appropriate localized control type by overriding the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.peers.automationpeer.getlandmarktypecore">GetLandMarkTypeCore</Hyperlink> method.
+                <LineBreak/>
+                <LineBreak/>
+                Controls that host a collection of elements such as ListView or ItemsRepeater also should expose that relationship through their AutomationPeer.
+
+            </Paragraph>
+        </RichTextBlock>
+    </StackPanel>
+</Page>

@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="WinUIAccessibilitySamples.Samples.SetsAccessibilitySample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUIAccessibilitySamples.Samples"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WinUIAccessibilitySamples.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <TextBlock Text="Sets of elements" Style="{StaticResource HeaderTextBlockStyle}"/>
+        <RichTextBlock Style="{StaticResource DefaultDescriptionStyle}">
+            <Paragraph>
+                A common way of presenting information is to present a list or set of elements. To make the understanding of such information with assistive technology, you can use the
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.automationproperties.positioninsetproperty">AutomationProperties.PositionInSet property</Hyperlink> and
+                <Hyperlink NavigateUri="https://docs.microsoft.com/uwp/api/windows.ui.xaml.automation.automationproperties.sizeofset">AutomationProperties.SizeOfSet property</Hyperlink> .
+                    
+                    Assistive technologies such as narrator or NVDA use these properties to let users know what element is selected and provide additional information about the collection of items currently visited.
+                    A lot of collection controls such as ListView or NavigationView will handle setting these properties for you, however if you are writing your own collection, you will need to set those values manually.
+                    Below is an example of these properties usage.
+            </Paragraph>
+        </RichTextBlock>
+
+        <controls:CodeExample HorizontalAlignment="Left">
+            <controls:CodeExample.Example>
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="The buttons below will be announced with their content. In addition to that, their respective position will be announced, e.g. 1 of 3 for 'Cut'." TextWrapping="WrapWholeWords" FontStyle="Italic" Margin="0,0,0,10"/>
+                    <StackPanel Orientation="Horizontal" Padding="3" Spacing="5">
+                        <Button Content="Cut" AutomationProperties.PositionInSet="1" AutomationProperties.SizeOfSet="3"/>
+                        <Button Content="Copy" AutomationProperties.PositionInSet="2" AutomationProperties.SizeOfSet="3"/>
+                        <Button Content="Past" AutomationProperties.PositionInSet="3" AutomationProperties.SizeOfSet="3"/>
+                    </StackPanel>
+                </StackPanel>
+            </controls:CodeExample.Example>
+            <controls:CodeExample.Xaml>
+                <x:String xml:space="preserve">
+&lt;StackPanel Orientation="Horizontal" Padding="3" Spacing="5"&gt;
+    &lt;Button Content="Cut" AutomationProperties.PositionInSet="1"
+        AutomationProperties.SizeOfSet="3"/&gt;
+    &lt;Button Content="Copy" AutomationProperties.PositionInSet="2"
+        AutomationProperties.SizeOfSet="3"/&gt;
+    &lt;Button Content="Past" AutomationProperties.PositionInSet="3"
+        AutomationProperties.SizeOfSet="3"/&gt;
+&lt;/StackPanel&gt;
+                    </x:String>
+            </controls:CodeExample.Xaml>
+        </controls:CodeExample>
+    </StackPanel>
+</Page>
