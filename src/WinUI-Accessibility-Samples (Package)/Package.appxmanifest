@@ -9,11 +9,11 @@
   <Identity
     Name="88b6e29e-b98d-4f8c-94e2-b83712b19378"
     Publisher="CN=Marcel"
-    Version="1.0.0.0" />
+    Version="1.0.3.0" />
 
   <Properties>
-    <DisplayName>WinUI-Accessibility-Samples</DisplayName>
-    <PublisherDisplayName>Marcel</PublisherDisplayName>
+    <DisplayName>WinUI Accessibility Samples</DisplayName>
+    <PublisherDisplayName>Marcel Wagner</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,7 +31,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="WinUI-Accessibility-Samples"
+        DisplayName="WinUI Accessibility Samples"
         Description="WinUI-Accessibility-Samples"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
